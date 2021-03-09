@@ -1,8 +1,8 @@
-# Remix Starter for Express
+# Remix Starter for Fly
 
 Welcome to Remix!
 
-This is a starter repo for using [Remix](https://remix.run) with [Express](http://expressjs.com/).
+This is a starter repo for using [Remix](https://remix.run) with [Express](http://expressjs.com/) and deploying to [Fly.io/(https://fly.io/)
 
 ## Development
 
@@ -10,10 +10,10 @@ After cloning the repo, rename `.npmrc.example` to `.npmrc` and insert the licen
 
 > Note: if this is a public repo, you'll probably want to move the line with your key into `~/.npmrc` to keep it private.
 
-Then, install all dependencies using `npm`:
+Then, install all dependencies using `yarn`:
 
 ```sh
-$ npm install
+$ yarn install
 ```
 
 Your `@remix-run/*` dependencies will come from the Remix package registry.
@@ -21,7 +21,7 @@ Your `@remix-run/*` dependencies will come from the Remix package registry.
 Once everything is installed, start the app in development mode with the following command:
 
 ```sh
-$ npm run dev
+$ yarn run dev
 ```
 
 This will run a few processes concurrently that will dynamically rebuild as your source files change. To see your changes, refresh the browser.
@@ -33,11 +33,23 @@ This will run a few processes concurrently that will dynamically rebuild as your
 To run the app in production mode, you'll need to build it first.
 
 ```sh
-$ npm run build
-$ npm start
+$ yarn run build
+$ yarn start
 ```
 
-This will start a single HTTP server process that will serve the app from the files generated in the build step.
+You'll also need to copy your remix license key into the Dockerfile on the line 
+ARG REMIX_TOKEN=replace_me
+
+
+
+## Deployment
+To deploy to fly, you'll need to install the fly CLU utility flyctl with the instructions [here](https://fly.io/docs/getting-started/installing-flyctl/)
+
+Run ```flyctl init``` , giving it the name you want and selecting Dockerfile as the build option.
+Run ```flyctl deploy``` to deploy it to the edge.
+
+## Bonus
+You can configure Github Actions to build and deploy to fly using the documentation provided [here](https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/) I did not need to modify the example action provided there.
 
 ## Documentation
 
